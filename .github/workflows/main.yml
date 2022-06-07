@@ -1,0 +1,14 @@
+name: Sample GH action
+
+on:
+  push:
+    branches: [ "master" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Start unittesting
+        run: |
+          python -m unittest discover

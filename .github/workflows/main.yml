@@ -9,6 +9,20 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: Start unittesting
-        run: |
-          python -m unittest discover
+      
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+        
+      
+      - name: Start unit tests
+        run: python -m unittest discover
+        
+      - name: deploy
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.DEPLOY_HOST }}
+          username: ${{ secrets.DEPLOY_USERNAME }}
+          password: ${{ secrets.DEPLOY_PASSWORD }}
+          script: |
+            cd /home/dominik/gh-actions-demo
+            git fetch && git pull

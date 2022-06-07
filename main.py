@@ -3,6 +3,7 @@ from flask import render_template
 from logic import get_today
 
 app = Flask(__name__)
+app.config['TEMPLATES_AUTO_RELOAD'] = True
 
 
 @app.route("/")
